@@ -7,3 +7,5 @@ My name is Daylan, I am a 3rd year Computer Science major. My hobbies are watchi
 My goals for this class is to learn how to code larger applications and get better at coding overall so I can work on projects myself.
 
 # Added for CSC340 assignment
+
+> Submitted for CSC340 Git assignment
