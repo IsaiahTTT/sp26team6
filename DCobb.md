@@ -1,4 +1,3 @@
-## Daylan Cobb
 
 ## About Me
 My name is Daylan, I am a 3rd year Computer Science major. My hobbies are watching sports and playing video games. My favorite athlete is Kawhi Leonard and my favorite video game is "Elden Ring"
