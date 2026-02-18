@@ -47,7 +47,7 @@
     }
 
     .signup-input:focus {
-        border-color: #4dcbcf;
+        border-color: #4d9fcf;
         background-color: #1f2122;
 
             /*box-shadow: 0 0 8px rgba(77, 203, 207, 0.5); */
@@ -69,7 +69,39 @@
     .signup-btn:hover {
         background-color: #72c0ff;
         box-shadow: 0 0 12px rgba(168, 168, 168, 0.6);
-        height: 50px;
+        
+    }
+
+    .login-btn {
+        padding: 15px;
+        border-radius: 40px;
+        border: none;
+        height: 65px;
+        width: 170px;
+        background-color: #1e2129;
+        color: #5f91c6;
+        display: flex;
+        justify-content:    center;
+        align-items: center;
+        margin-top: 25px;
+        border: 2px solid #33363a;
+        text-decoration: none;
+
+            }
+    .top-left{
+        position: absolute;
+        top: 20px;
+        left: 130px;
+        font-size: 1.5rem;
+        color: #52affc;
+    }
+
+    .top-right{
+        position: absolute;
+        top: 20px;
+        right: 130px;
+        font-size: 1.5rem;
+        color: #52affc;
     }
 
         </style>
@@ -78,13 +110,17 @@
 
     <body>
 
-         <h2>lifeLvling</h2>
+        
+        <div class="top-left"><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="90"></div>
+        <div class="top-right"><a href="loginpage.html" class="login-btn">login</a></div>
+         <h2>Create your profile</h2>
 
+         
     <form class="signup-form">
         
         <input type="email" placeholder="Enter username or email" class="signup-input">
         <input type="password" placeholder="Create your password" class="signup-input">
-        <button type="submit" class="signup-btn">Sign up</button>
+        <button type="submit" class="signup-btn">Create Account</button>
     </form>
 
     </body>
