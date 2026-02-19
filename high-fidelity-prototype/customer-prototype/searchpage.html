@@ -26,7 +26,11 @@
             color: #ffffff;
         }
 
-
+        h1 {
+            font-size: 2rem;
+            margin-left: 2px;
+            color: #ffffff;
+        }
 
         .sidebar {
             width: 135px;
@@ -72,7 +76,7 @@
             padding: 20px;
 
             position: fixed;
-            top: 100px;
+            top: 200px;
             right: 40px;
 
             border-radius: 25px;
@@ -97,6 +101,7 @@
             background-color: #1e2129;
             color: #ffffff;
             border: 2px solid #f9eeee;
+            width: 400px;
         }
 
         .card-header {
@@ -109,6 +114,20 @@
         .card-body {
             color: #ddd;
         }
+
+        .btn-primary {
+            background-color: #52affc;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            margin-top: 15px;
+            border-radius: 25px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
     </style>
 </head>
 
@@ -119,50 +138,64 @@
             <ul>
                 <li><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="60"></div>
                 </li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="searchpage.html">Search</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="#news">News</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
         </nav>
     </aside>
     <aside class="right-sidebar">
-        <h4>Due Objectives</h4>
+        <h4>Popular Courses!</h4>
         <ul>
-            <li>All finished!</li>
+            <li>Cardio Routine</li>
+            <li>Strength Training</li>
+            <li>Yoga Basics</li>
 
         </ul>
     </aside>
-
     <div class="content">
-        <h2>Dashboard</h2>
+
+        <h2>Course Search</h2>
+        <hr style="margin:30px 0; opacity:0.2;">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search for courses..." aria-label="Search for courses"
+                aria-describedby="button-search"> <button class="btn btn-outline-secondary" type="button"
+                id="button-search">Search</button>
+        </div>
+        <h1>recommended courses...</h1>
 
 
-        <div class="row mb-3">
+        <div class="row">
+
+
             <div class="col-md-3 d-flex justify-content-center">
-                <a href="coursepage.html" class="text-decoration-none">
-                    <div class="card text-center character-card" style="width: 20rem;">
-                        <h5 class="card-header">Cardio Routine</h5>
-                        <img src=logo/ife.png class="card-img-top" alt="Cardio">
-                        <div class="card-body">
-                            <p class="card-text">
-                                A low intesity cardio routine to get your heart pumping and blood flowing! This routine
-                                is designed to be beginner friendly and can be done at home with no equipment needed.
-                            <div class="card text-center character-card" style="width: 18rem;" data-search=" Cardio">
-                            </div>
-                        </div>
+                <div class="card course-card">
+                    <div class="card-header">Cardio Routine - Isaiah Turner</div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            A comprehensive cardio workout plan designed to improve cardiovascular health and endurance.
+                        </p>
+                        <a href="coursepage.html" class="btn btn-primary">View Course</a>
                     </div>
-                </a>
+                </div>
             </div>
 
 
+            <div class="col-md-3 d-flex justify-content-center">
+                <div class="card course-card">
+                    <div class="card-header">Strength Training - Dr. Johnson</div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            A structured strength training program focused on building muscle and increasing overall
+                            strength.
+                        </p>
+                        <a href="#" class="btn btn-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
-
-
-
-
-
 </body>
 
 
