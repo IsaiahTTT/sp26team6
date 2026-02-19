@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provider – Course Reviews</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Fredoka', cursive;
+            background-color: #1e2129;
+            color: white;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .panel {
+            background: #2a2f3a;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .review {
+            background: #1e2129;
+            border: 1px solid #3a4150;
+            border-radius: 16px;
+            padding: 14px;
+            margin-top: 12px;
+        }
+
+        .review-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stars {
+            color: #ffd166;
+        }
+
+        .muted {
+            color: #b8c0d0;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #3a4150;
+            background: #1e2129;
+            color: white;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .reply-btn {
+            margin-top: 8px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            background: #5f91c6;
+            color: white;
+        }
+
+        .back-link {
+            color: #52affc;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <a href="provider-dashboard.html" class="back-link">&larr; Back to Dashboard</a>
+
+        <div class="panel">
+            <h1>Course Reviews (Provider View)</h1>
+            <p class="muted">Read what customers have said and reply to their reviews.</p>
+        </div>
+
+        <div class="panel">
+            <h2 style="margin-top:0;">Recent Reviews</h2>
+
+            <div class="review">
+                <div class="review-top">
+                    <h4>Cardio Routine</h4>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                </div>
+                <p>
+                    This course was amazing! The workouts were easy to follow and
+                    I actually started enjoying cardio for once.
+                </p>
+                <small class="muted">— Embo</small>
+
+                <label style="margin-top:10px;">Your Reply</label>
+                <textarea placeholder="Thank you for the feedback!"></textarea>
+                <button class="reply-btn">Post Reply</button>
+            </div>
+
+            <div class="review">
+                <div class="review-top">
+                    <h4>Strength Training</h4>
+                    <span class="stars">⭐⭐⭐⭐</span>
+                </div>
+                <p>
+                    Great structure, but I would love a few more beginner alternatives.
+                </p>
+                <small class="muted">— Alex</small>
+
+                <label style="margin-top:10px;">Your Reply</label>
+                <textarea placeholder="Thanks for the suggestion, I will add more options."></textarea>
+                <button class="reply-btn">Post Reply</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
