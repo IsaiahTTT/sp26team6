@@ -28,7 +28,7 @@ The LocalHarvest Hub Backend API provides a RESTful interface for managing:
 The lifeLvling Backend API provides a RESTful interface for managing:
 
 - Customers – User accounts and progression system  
-- Providers – Users who create and manage courses  
+- Providers – Users who create and manage the courses  
 - Courses – Services offered by providers  
 - Enrollments – Customer subscriptions to courses  
 - Reviews – Customer feedback on courses  
