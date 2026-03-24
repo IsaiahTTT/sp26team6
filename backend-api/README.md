@@ -397,3 +397,20 @@ Status Code: 204 No Content
 | UC-REV-005 | Get Reviews by Rating        | /reviews/rating/{rating}          | GET    | Retrieve reviews filtered by rating              |
 | UC-REV-006 | Update Review                | /reviews/{id}                     | PUT    | Update an existing review                        |
 | UC-REV-007 | Delete Review                | /reviews/{id}                     | DELETE | Remove a review                                  |
+## Provider Use Case Mapping
+
+| Use Case ID | Use Case Name                  | Endpoint                          | Method | Description                                      |
+|------------|--------------------------------|-----------------------------------|--------|--------------------------------------------------|
+| UC-PROV-001 | Create Provider                | /providers                        | POST   | Create a new provider profile                    |
+| UC-PROV-002 | Get All Providers              | /providers                        | GET    | Retrieve all providers                           |
+| UC-PROV-003 | Get Provider by ID             | /providers/{id}                   | GET    | Retrieve a specific provider                     |
+| UC-PROV-004 | Update Provider                | /providers/{id}                   | PUT    | Update provider profile                          |
+| UC-PROV-005 | Delete Provider                | /providers/{id}                   | DELETE | Remove a provider                                |
+
+| UC-PROV-006 | Create Course (Service)        | /courses                          | POST   | Provider creates a course                        |
+| UC-PROV-007 | Get All Courses                | /courses                          | GET    | Retrieve all courses                             |
+| UC-PROV-008 | Update Course                  | /courses/{id}                     | PUT    | Update course details                            |
+| UC-PROV-009 | Delete Course                  | /courses/{id}                     | DELETE | Remove a course                                  |
+
+| UC-PROV-010 | Reply to Review                | /reviewReplies                    | POST   | Provider replies to a review                     |
+| UC-PROV-011 | Get All Replies                | /reviewReplies                    | GET    | Retrieve all review replies                      |
