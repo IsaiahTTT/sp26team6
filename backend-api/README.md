@@ -28,8 +28,11 @@ The LocalHarvest Hub Backend API provides a RESTful interface for managing:
 The lifeLvling Backend API provides a RESTful interface for managing:
 
 - Customers – User accounts and progression system  
-- Enrollments – Course enrollment tracking  
-- Reviews – Customer feedback and ratings  
+- Providers – Users who create and manage courses  
+- Courses – Services offered by providers  
+- Enrollments – Customer subscriptions to courses  
+- Reviews – Customer feedback on courses  
+- ReviewReplies – Provider responses to reviews  
 
 ---
 
@@ -113,7 +116,55 @@ DELETE /customers/1
 
 Status Code: 204 No Content
 
+---## Provider Endpoints
+
 ---
+
+### Create Provider
+
+Endpoint: POST /providers  
+Description: Create a new provider.
+
+Body:
+{
+  "username": "string",
+  "email": "string"
+}
+
+Status Code: 201 Created
+
+---
+
+### Get All Providers
+
+Endpoint: GET /providers  
+Description: Retrieve all providers.
+
+Status Code: 200 OK
+
+---
+
+### Get Provider by ID
+
+Endpoint: GET /providers/{id}
+
+Status Code: 200 OK or 404 Not Found
+
+---
+
+### Update Provider
+
+Endpoint: PUT /providers/{id}
+
+Status Code: 200 OK or 404 Not Found
+
+---
+
+### Delete Provider
+
+Endpoint: DELETE /providers/{id}
+
+Status Code: 204 No Content
 
 ## 3. Enrollment Endpoints
 
@@ -298,7 +349,22 @@ DELETE /reviews/1
 
 Status Code: 204 No Content
 
+---## Course Endpoints
+
+- POST /courses
+- GET /courses
+- GET /courses/{id}
+- PUT /courses/{id}
+- DELETE /courses/{id}
+
 ---
+
+## ReviewReply Endpoints
+
+- POST /reviewReplies
+- GET /reviewReplies
+- GET /reviewReplies/{id}
+- DELETE /reviewReplies/{id}
 
 ## 5. Example Workflow
 
