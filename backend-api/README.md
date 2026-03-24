@@ -21,9 +21,8 @@ The LocalHarvest Hub Backend API provides a RESTful interface for managing:
 ## 2. UML Class Diagram
 ![UML Class Diagram](../docs/uml-class.png)
 
+
 ## 3. API Endpoints
-
-
 ---
 
 The lifeLvling Backend API provides a RESTful interface for managing:
@@ -34,7 +33,7 @@ The lifeLvling Backend API provides a RESTful interface for managing:
 
 ---
 
-## 2. Customer Endpoints (Customer, Enrollment, Reviews)
+## Customer Endpoints (Customer, Enrollment, Reviews)
 
 ---
 
@@ -307,3 +306,28 @@ Status Code: 204 No Content
 2. Enroll the customer in a course  
 3. Submit a review  
 4. Retrieve reviews by rating or course  
+
+
+## 4. Use Case Mapping Table
+
+| Use Case ID | Use Case Name                | Endpoint                          | Method | Description                                      |
+|------------|------------------------------|-----------------------------------|--------|--------------------------------------------------|
+| UC-CUST-001 | Create Customer              | /customers                        | POST   | Create a new customer account                    |
+| UC-CUST-002 | Get All Customers            | /customers                        | GET    | Retrieve all customers                           |
+| UC-CUST-003 | Get Customer by ID           | /customers/{id}                   | GET    | Retrieve a specific customer                     |
+| UC-CUST-004 | Update Customer              | /customers/{id}                   | PUT    | Update customer information                      |
+| UC-CUST-005 | Delete Customer              | /customers/{id}                   | DELETE | Remove a customer from the system                |
+
+| UC-ENR-001 | Create Enrollment            | /enrollments                      | POST   | Enroll a customer in a course                    |
+| UC-ENR-002 | Get All Enrollments          | /enrollments                      | GET    | Retrieve all enrollments                         |
+| UC-ENR-003 | Get Enrollment by ID         | /enrollments/{id}                 | GET    | Retrieve a specific enrollment                   |
+| UC-ENR-004 | Update Enrollment            | /enrollments/{id}                 | PUT    | Update enrollment status                         |
+| UC-ENR-005 | Delete Enrollment            | /enrollments/{id}                 | DELETE | Remove an enrollment                             |
+
+| UC-REV-001 | Create Review                | /reviews                          | POST   | Submit a review for a course                     |
+| UC-REV-002 | Get All Reviews              | /reviews                          | GET    | Retrieve all reviews                             |
+| UC-REV-003 | Get Review by ID             | /reviews/{id}                     | GET    | Retrieve a specific review                       |
+| UC-REV-004 | Get Reviews by Course        | /reviews/course/{courseId}        | GET    | Retrieve reviews for a specific course           |
+| UC-REV-005 | Get Reviews by Rating        | /reviews/rating/{rating}          | GET    | Retrieve reviews filtered by rating              |
+| UC-REV-006 | Update Review                | /reviews/{id}                     | PUT    | Update an existing review                        |
+| UC-REV-007 | Delete Review                | /reviews/{id}                     | DELETE | Remove a review                                  |
