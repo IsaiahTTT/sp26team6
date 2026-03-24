@@ -7,10 +7,9 @@ import com.project.lifeLvling.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class CustomerService {
-    
+
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -32,19 +31,22 @@ public class CustomerService {
 
     public Customer updateCustomer(Long id, Customer updatedCustomer) {
         Optional<Customer> existingCustomerOpt = customerRepository.findById(id);
+
         if (existingCustomerOpt.isPresent()) {
             Customer existingCustomer = existingCustomerOpt.get();
             existingCustomer.setUsername(updatedCustomer.getUsername());
             existingCustomer.setEmail(updatedCustomer.getEmail());
             existingCustomer.setPassword(updatedCustomer.getPassword());
+            existingCustomer.setPoints(updatedCustomer.getPoints());
+            existingCustomer.setLevel(updatedCustomer.getLevel());
+
             return customerRepository.save(existingCustomer);
         }
+
         return null;
     }
 
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
-
-
 }
