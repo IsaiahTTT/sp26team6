@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Fredoka', cursive;
+            background-color: #1e2129;
+            color: white;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 80px auto;
+            background-color: #2a2f3a;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-container h2 {
+            margin-bottom: 25px;
+        }
+
+        .profile-section {
+            margin-bottom: 25px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            margin-top: 8px;
+            background-color: #1e2129;
+            color: white;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background-color: #5f91c6;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #bd0a0a;
+            color: white;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 130px;
+            font-size: 1.5rem;
+            color: #52affc;
+        }
+
+        .return-btn {
+            padding: 15px;
+            border-radius: 40px;
+            border: none;
+            height: 30px;
+            width: 170px;
+            background-color: #1e2129;
+            color: #5f91c6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 70px;
+            border: 2px solid #33363a;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-container">
+        <div class="top-right"><a href="dashboard.html" class="return-btn">Return</a></div>
+        <h2>Edit Profile</h2>
+
+        <div class="profile-section">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="IsaiahTTT">
+        </div>
+
+        <div class="profile-section">
+            <label>Bio</label>
+            <textarea id="bio" rows="3"></textarea>
+        </div>
+
+        <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+
+        <hr style="margin:30px 0; opacity:0.2;">
+
+        <div class="profile-section">
+            <label>Change Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+            <button class="save-btn" onclick="changePassword()">Update Password</button>
+        </div>
+
+        <hr style="margin:30px 0; opacity:0.2;">
+
+        <button class="delete-btn" onclick="deleteProfile()">Delete Profile</button>
+
+    </div>
+</body>
+
+</html>
