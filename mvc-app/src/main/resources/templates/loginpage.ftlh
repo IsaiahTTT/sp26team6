@@ -106,24 +106,25 @@
         </style>
 
 </head>
-
     <body>
-        <div class="top-left"><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="90"></div>
-        <div class="top-right"><a href="signuppage.html" class="signup-btn">Sign Up</a></div>
+        <div class="top-left">
+            <a href="/"><img src="/images/ife.png" alt="Logo" width="90">
+        </div>
+        <div class="top-right">
+            <a href="/signup" class="signup-btn">Sign Up</a>
+        </div>
+
          <h2>Login</h2>
 
-    <form class="login-form" action = "dashboard.html">
-        <input type="email" placeholder="Enter your email" class="login-input">
-        <input type="password" placeholder="Enter your password" class="login-input">
-        <button type="submit" class="login-btn">Login</button>
-    </form>
+         <#if error??>
+            <p class="error-message">${error}</p>
+         </#if>
+
+        <form class="login-form" action = "/login" method="post">
+            <input type="text" name="email" placeholder="Enter your email" class="login-input" required>
+            <input type="password" name="password" placeholder="Enter your password" class="login-input" required>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
 
     </body>
-
-
-
-
-
-
-
 </html>

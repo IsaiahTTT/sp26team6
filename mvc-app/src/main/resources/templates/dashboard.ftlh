@@ -117,10 +117,10 @@
     <aside class="sidebar">
         <nav>
             <ul>
-                <li><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="60"></div>
+                <li><a href="/"><img src="/images/ife.png" alt="Logo" width="60"></a>
                 </li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="searchpage.html">Search</a></li>
+                <li><a href="/profile/${customer.customerId}">Profile</a></li>
+                <li><a href="/search">Search</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>
             </ul>

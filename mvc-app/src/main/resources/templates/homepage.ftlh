@@ -114,11 +114,11 @@
     <body>
 
 
-         <h2><img src="logo/ife.png" alt="Logo" width="400"></h2>
+         <h2><img src="/images/ife.png" alt="Logo" width="400"></h2>
 
         <p style="font-size: 2rem; color: #424447; margin-bottom: 50px;">An engaging and interactive platform for personal development!</p>
-        <a href="signuppage.html" class="homepage-btn">Sign up</a>
-        <a href="loginpage.html" class="login-btn">I ALREADY HAVE AN ACCOUNT</a>
+        <a href="/signup" class="homepage-btn">Sign up</a>
+        <a href="/login" class="login-btn">I ALREADY HAVE AN ACCOUNT</a>
         
 
     </body>

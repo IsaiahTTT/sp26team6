@@ -29,6 +29,10 @@ public class CustomerService {
         return customerRepository.findByUsername(username).orElse(null);
     }
 
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email).orElse(null);
+    }
+
     public Customer updateCustomer(Long id, Customer updatedCustomer) {
         Optional<Customer> existingCustomerOpt = customerRepository.findById(id);
 

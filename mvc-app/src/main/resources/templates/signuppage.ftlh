@@ -111,25 +111,21 @@
     <body>
 
         
-        <div class="top-left"><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="90"></div>
-        <div class="top-right"><a href="loginpage.html" class="login-btn">login</a></div>
+        <div class="top-left">
+            <a href="/"><img src="/images/ife.png" alt="Logo" width="90">
+            </div>
+            <div class="top-right">
+                <a href="/login" class="login-btn">login</a> 
+            </div>
          <h2>Create your profile</h2>
 
          
-    <form class="signup-form" action = "dashboard.html">
-        
-        <input type="email" placeholder="Enter username or email" class="signup-input">
-        <input type="password" placeholder="Create your password" class="signup-input">
-        <button type="submit" class="signup-btn">Create Account</button>
-        
-    </form>
+        <form class="signup-form" action = "/signup" method="post">
+            <input type="email" name ="email" placeholder="Enter email" class="signup-input" required>
+            <input type="text" name="username" placeholder="Enter username" class="signup-input" required>
+            <input type="password" name="password" placeholder="Create your password" class="signup-input" required>
+            <button type="submit" class="signup-btn">Create Account</button>
+        </form>
 
     </body>
-
-
-
-
-
-
-
 </html>
