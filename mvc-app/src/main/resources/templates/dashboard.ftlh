@@ -26,7 +26,7 @@
             color: #ffffff;
         }
 
-
+        
 
         .sidebar {
             width: 135px;
@@ -140,14 +140,16 @@
 
         <div class="row mb-3">
             <div class="col-md-3 d-flex justify-content-center">
-                <a href="coursepage.html" class="text-decoration-none">
+                <a href="/courses/101?customerId=${customer.customerId}" class="text-decoration-none">
                     <div class="card text-center character-card" style="width: 20rem;">
                         <h5 class="card-header">Cardio Routine</h5>
-                        <img src=logo/ife.png class="card-img-top" alt="Cardio">
+                        <img src="/images/ife.png" class="card-img-top" alt="Cardio">
                         <div class="card-body">
                             <p class="card-text">
                                 A low intesity cardio routine to get your heart pumping and blood flowing! This routine
                                 is designed to be beginner friendly and can be done at home with no equipment needed.
+                            </p>
+                        </div>
                             <div class="card text-center character-card" style="width: 18rem;" data-search=" Cardio">
                             </div>
                         </div>

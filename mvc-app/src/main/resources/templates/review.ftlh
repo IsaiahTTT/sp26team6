@@ -160,13 +160,13 @@
 
 <body>
 
+
     <div class="page">
 
-
         <div class="panel">
-            <div class="top-right"><a href="coursepage.html" class="return-btn">Return</a></div>
+            <div class="top-right"><a href="/courses/${courseId}?customerId=${customer.customerId}" class="return-btn">Return</a></div>
             <h1>Course Reviews</h1>
-
+            <p class ="muted">Course ID: ${courseId}</p>
             <p class="muted">Write a review and see what others have said.</p>
         </div>
 
@@ -174,16 +174,18 @@
         <div class="panel">
             <h2 style="margin-top:0;">Write a Review</h2>
 
-            <form id="reviewForm">
+            <form action="/reviews/create" method="post">
+                <input type="hidden" name="customerId" value="${customerId}">
+                <input type="hidden" name="courseId" value="${courseId}">
                 <div class="row">
                     <div>
-                        <label for="courseName">Course Name</label>
-                        <input id="courseName" type="text" placeholder="e.g., Cardio Routine" required>
+                        <label >Course</label>
+                        <input type="text" value="Course ${courseId}" readonly>
                     </div>
 
                     <div>
                         <label for="rating">Rating</label>
-                        <select id="rating" required>
+                        <select id="rating" name="rating" required>
                             <option value="5">5 ⭐</option>
                             <option value="4">4 ⭐</option>
                             <option value="3">3 ⭐</option>
@@ -194,7 +196,7 @@
                 </div>
 
                 <label for="reviewText">Your Review</label>
-                <textarea id="reviewText" placeholder="What did you like? What could be better?" required></textarea>
+                <textarea id="reviewText" name="review" placeholder="What did you like? What could be better?" required></textarea>
 
                 <button class="btn" type="submit">Post Review</button>
 
@@ -205,15 +207,19 @@
         <div class="panel">
             <h2 style="margin-top:0;">View Reviews</h2>
 
-            <div class="review">
-                <h4>Cardio Routine ⭐⭐⭐⭐⭐</h4>
-                <p>
-                    This course was amazing! The workouts were easy to follow and
-                    I actually started enjoying cardio for once.
-                </p>
-                <small>— Embo</small>
-            </div>
-
+            <#if reviews?has_content>
+                <#list reviews as review>
+                    <div class="review">
+                        <div class="review-top">
+                            <h4 style="margin:0;">${review.username}</h4>
+                            <span class="stars">${review.rating}/5 ⭐</span>
+                        </div>
+                        <p>${review.review}</p>
+                    </div>
+                </#list>
+            <#else>
+                <p class="empty-message">No reviews have been posted for this course yet.</p>
+            </#if>
         </div>
 
     </div>

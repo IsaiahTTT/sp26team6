@@ -136,9 +136,9 @@
     <aside class="sidebar">
         <nav>
             <ul>
-                <li><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="60"></div>
+                <li><a href="homepage.html"><img src="/images/ife.png" alt="Logo" width="60"></div>
                 </li>
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="/dashboard/${customer.customerId}">Dashboard</a></li>
                 <li><a href="#news">News</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>
@@ -176,7 +176,7 @@
                         <p class="card-text">
                             A comprehensive cardio workout plan designed to improve cardiovascular health and endurance.
                         </p>
-                        <a href="coursepage.html" class="btn btn-primary">View Course</a>
+                        <a href="/course/${course.courseId}" class="btn btn-primary">View Course</a>
                     </div>
                 </div>
             </div>

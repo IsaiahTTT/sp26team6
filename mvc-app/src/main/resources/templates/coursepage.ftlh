@@ -152,12 +152,12 @@
 <body>
     <aside class="sidebar">
         <ul>
-            <li><a href="homepage.html"><img src="logo/ife.png" alt="Logo" width="60"></div>
+            <li><a href="homepage.html"><img src="/images/ife.png" alt="Logo" width="60"></div>
             </li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="searchpage.html">Search</a></li>
+            <li><a href="/dashboard/${customer.customerId}">Dashboard</a></li>
+            <li><a href="/search">Search</a></li>
             <li><a href="#">Progress</a></li>
-            <li><a href="Review.html">Review</a></li>
+            <li><a href="/review/${courseId}?customerId=${customer.customerId}">Review</a></li>
             <li><a href="#">Add/Drop</a></li>
         </ul>
     </aside>
@@ -205,7 +205,7 @@
                 <strong>Module 3:</strong> Endurance Builder
             </div>
 
-        </div>
+            
 
 
 
