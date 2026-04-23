@@ -168,7 +168,11 @@
             <h1>Course Reviews</h1>
             <p class ="muted">Course ID: ${courseId}</p>
             <p class="muted">Write a review and see what others have said.</p>
+
+            
+
         </div>
+
 
 
         <div class="panel">
@@ -199,6 +203,12 @@
                 <textarea id="reviewText" name="review" placeholder="What did you like? What could be better?" required></textarea>
 
                 <button class="btn" type="submit">Post Review</button>
+
+                <#if error??>
+                    <p style="color: #ff8080; font-weight: bold; margin-top: 10px;">
+                        ${error}
+                    </p>
+                </#if>
 
             </form>
         </div>

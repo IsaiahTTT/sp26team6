@@ -117,14 +117,17 @@
          <h2>Login</h2>
 
          <#if error??>
-            <p class="error-message">${error}</p>
-         </#if>
+        <p style="color: red; font-weight: bold;">
+        Invalid email or password.
+        </p>
+        </#if>
 
         <form class="login-form" action = "/login" method="post">
             <input type="text" name="email" placeholder="Enter your email" class="login-input" required>
             <input type="password" name="password" placeholder="Enter your password" class="login-input" required>
             <button type="submit" class="login-btn">Login</button>
         </form>
+
 
     </body>
 </html>

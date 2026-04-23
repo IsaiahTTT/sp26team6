@@ -29,6 +29,8 @@ public String createCustomer(@RequestParam String username, @RequestParam String
     return "redirect:/dashboard/" + saved.getCustomerId(); // Redirect to newly created accounts dashboard page after successful signup
 }
 
+
+
 @PostMapping("/login")
 public String loginCustomer(@RequestParam String email, @RequestParam String password) {
     Customer customer = customerService.getCustomerByEmail(email);

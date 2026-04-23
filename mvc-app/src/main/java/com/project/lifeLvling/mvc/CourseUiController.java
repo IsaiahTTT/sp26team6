@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.lifeLvling.entity.Customer;
-import com.project.lifeLvling.entity.Review;
 import com.project.lifeLvling.service.CustomerService;
-import com.project.lifeLvling.service.ReviewService;
+
 
 
 
