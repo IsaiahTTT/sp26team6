@@ -21,12 +21,20 @@ public class Course {
     @Column(nullable = false)
     private Long providerId;
 
+    private String description;
+    private String category;
+    private Double price;
+
     public Course() {}
 
-    public Course(Long courseId, String title, Long providerId) {
+    public Course(Long courseId, String title, Long providerId,
+                  String description, String category, Double price) {
         this.courseId = courseId;
         this.title = title;
         this.providerId = providerId;
+        this.description = description;
+        this.category = category;
+        this.price = price;
     }
 
     public Long getCourseId() { return courseId; }
@@ -37,4 +45,13 @@ public class Course {
 
     public Long getProviderId() { return providerId; }
     public void setProviderId(Long providerId) { this.providerId = providerId; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 }
