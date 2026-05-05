@@ -3,19 +3,27 @@ package com.project.lifeLvling.mvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.project.lifeLvling.service.CustomerService;
+import com.project.lifeLvling.service.CourseService;
 import com.project.lifeLvling.entity.Customer;
+import com.project.lifeLvling.entity.Course;
+import com.project.lifeLvling.service.EnrollmentService;
+import com.project.lifeLvling.entity.Enrollment;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
+import java.util.List;
 
 @Controller
 public class CustomerUiController {
     
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private EnrollmentService enrollmentService;
 
 @PostMapping("/signup")
 public String createCustomer(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
@@ -74,13 +82,39 @@ public String deleteProfile(@PathVariable Long customerId) {
 
 }
 
+
 @GetMapping("/dashboard/{customerId}")
 public String showDashboard(@PathVariable Long customerId, Model model) {
     Customer customer = customerService.getCustomerById(customerId);
     model.addAttribute("customer", customer);
+
+    List<Enrollment> enrollments = enrollmentService.getEnrollmentsByCustomerId(customerId);
+    List<Course> courses = enrollments.stream()
+            .map(enrollment -> courseService.getCourseById(enrollment.getCourseId()))
+            .filter(c -> c != null)
+            .toList();
+
+    model.addAttribute("enrolledCourses", courses);
     return "dashboard"; // Return the dashboard view
 
+}
 
+@Autowired
+private CourseService courseService;
+
+@GetMapping("/search")
+public String showSearchPage(@RequestParam long customerId, @RequestParam(required = false) String keyword, Model model) {
+
+
+    Customer customer = customerService.getCustomerById(customerId);
+
+    List<Course> courses = courseService.searchCourses(keyword);
+
+    model.addAttribute("courses", courses);
+    model.addAttribute("customer", customer);
+    model.addAttribute("customerId", customerId);
+    model.addAttribute("keyword", keyword);
+    return "searchpage"; // Return the search page view
 }
 
 }

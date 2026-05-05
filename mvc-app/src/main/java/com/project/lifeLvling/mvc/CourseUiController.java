@@ -11,7 +11,18 @@ import com.project.lifeLvling.entity.Customer;
 import com.project.lifeLvling.entity.Provider;
 import com.project.lifeLvling.service.CourseService;
 import com.project.lifeLvling.service.CustomerService;
+import com.project.lifeLvling.service.CourseService;
 import com.project.lifeLvling.service.ProviderService;
+import com.project.lifeLvling.entity.Course;
+import com.project.lifeLvling.entity.Provider;
+import com.project.lifeLvling.service.EnrollmentService;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+
+
+
+
 
 @Controller
 public class CourseUiController {
@@ -20,34 +31,50 @@ public class CourseUiController {
     private final CourseService courseService;
     private final ProviderService providerService;
 
-    public CourseUiController(CustomerService customerService,
-                              CourseService courseService,
-                              ProviderService providerService) {
-        this.customerService = customerService;
-        this.courseService = courseService;
-        this.providerService = providerService;
-    }
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
 
-    @GetMapping("/courses/{courseId}")
-    public String showCoursePage(@PathVariable Long courseId,
-                                 @RequestParam Long customerId,
-                                 Model model) {
+    private CourseService courseService;
+    @Autowired
+    private ProviderService providerService;
 
-        Customer customer = customerService.getCustomerById(customerId);
+    @Autowired
+    private EnrollmentService enrollmentService;
+
+
+
+
+    @GetMapping("/course/{courseId}")
+    public String showCoursePage(@PathVariable Long courseId, @RequestParam Long customerId, Model model) {
+
         Course course = courseService.getCourseById(courseId);
 
-        model.addAttribute("customer", customer);
-        model.addAttribute("course", course);
-        model.addAttribute("courseId", courseId);
-
-        if (course != null) {
-            model.addAttribute("courseName", course.getTitle());
-
-            Provider provider = providerService.getProviderById(course.getProviderId());
-            model.addAttribute("provider", provider);
-        } else {
-            model.addAttribute("courseName", "Unknown Course");
+        if (course == null) {
+            return "redirect:/search?customerId=" + customerId; // Redirect back to search page if course not found
         }
+        Customer customer = customerService.getCustomerById(customerId);
+        Provider provider = providerService.getProviderById(course.getProviderId());
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("customer", customer);
+        model.addAttribute("provider", provider);
+        model.addAttribute("course", course);
+
+            return "coursepage"; // Return the view for displaying course details
+    }
+
+    @PostMapping("/course/{courseId}/enroll")
+    public String enrollInCourse(@PathVariable Long courseId, @RequestParam Long customerId, Model model) {
+        enrollmentService.enrollCustomer(customerId, courseId);
+        return "redirect:/dashboard/" + customerId; // Redirect to dashboard after successful enrollment
+    }
+
+    @PostMapping("/course/{courseId}/drop")
+    public String dropCourse(@PathVariable Long courseId, @RequestParam Long customerId) {
+        enrollmentService.dropCourse(customerId, courseId);
+        return "redirect:/dashboard/" + customerId; // Redirect to dashboard after dropping the course
+    }
+}
 
         return "coursepage";
     }

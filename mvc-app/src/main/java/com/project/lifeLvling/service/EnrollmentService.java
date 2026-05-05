@@ -5,6 +5,7 @@ import com.project.lifeLvling.repository.EnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,22 +35,22 @@ public class EnrollmentService {
         return enrollmentRepository.findByCourseId(courseId);
     }
 
-    public Enrollment updateEnrollment(Long id, Enrollment updatedEnrollment) {
-        Optional<Enrollment> existingEnrollmentOpt = enrollmentRepository.findById(id);
-
-        if (existingEnrollmentOpt.isPresent()) {
-            Enrollment existingEnrollment = existingEnrollmentOpt.get();
-            existingEnrollment.setCustomerId(updatedEnrollment.getCustomerId());
-            existingEnrollment.setCourseId(updatedEnrollment.getCourseId());
-            existingEnrollment.setStatus(updatedEnrollment.getStatus());
-
-            return enrollmentRepository.save(existingEnrollment);
+    public Enrollment enrollCustomer(Long customerId, Long courseId) {
+        Optional<Enrollment> existing = enrollmentRepository.findByCustomerIdAndCourseId(customerId, courseId);
+        
+        if (existing.isPresent()) {
+            return existing.get(); // Return existing enrollment if already enrolled
         }
 
-        return null;
+        Enrollment enrollment = new Enrollment();
+        enrollment.setCustomerId(customerId);
+        enrollment.setCourseId(courseId);
+        enrollment.setStatus("ACTIVE");
+        return enrollmentRepository.save(enrollment);
     }
 
-    public void deleteEnrollment(Long id) {
-        enrollmentRepository.deleteById(id);
+    @Transactional
+    public void dropCourse(Long customerId, Long courseId) {
+        enrollmentRepository.deleteByCustomerIdAndCourseId(customerId, courseId);
     }
 }

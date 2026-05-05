@@ -26,7 +26,10 @@
             color: #ffffff;
         }
 
-        
+        h5{
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
 
         .sidebar {
             width: 135px;
@@ -109,6 +112,10 @@
         .card-body {
             color: #ddd;
         }
+
+        .p1{
+            color: #ddd;
+        }
     </style>
 </head>
 
@@ -120,7 +127,7 @@
                 <li><a href="/"><img src="/images/ife.png" alt="Logo" width="60"></a>
                 </li>
                 <li><a href="/profile/${customer.customerId}">Profile</a></li>
-                <li><a href="/search">Search</a></li>
+                <li><a href="/search?customerId=${customer.customerId}">Search</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
@@ -139,33 +146,38 @@
 
 
         <div class="row mb-3">
-            <div class="col-md-3 d-flex justify-content-center">
-                <a href="/courses/101?customerId=${customer.customerId}" class="text-decoration-none">
-                    <div class="card text-center character-card" style="width: 20rem;">
-                        <h5 class="card-header">Cardio Routine</h5>
-                        <img src="/images/ife.png" class="card-img-top" alt="Cardio">
-                        <div class="card-body">
-                            <p class="card-text">
-                                A low intesity cardio routine to get your heart pumping and blood flowing! This routine
-                                is designed to be beginner friendly and can be done at home with no equipment needed.
-                            </p>
-                        </div>
-                            <div class="card text-center character-card" style="width: 18rem;" data-search=" Cardio">
-                            </div>
-                        </div>
+    <#list enrolledCourses as course>
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <a href="/course/${course.courseId}?customerId=${customer.customerId}"
+               class="text-decoration-none">
+                <div class="card text-center character-card"
+                     style="width: 20rem;">
+                    <h5 class="card-header">
+                        ${course.title!"Untitled Course"}
+                    </h5>
+                    <img src="/images/ife.png"
+                         class="card-img-top"
+                         alt="${course.title!''}">
+                    <div class="card-body">
+                        <p class="card-text">
+                            ${course.description!"No description available for this course yet."}
+                        </p>
+                        <p>
+                            <strong>Category:</strong>
+                            ${course.category!"N/A"}
+                        </p>
                     </div>
-                </a>
-            </div>
-
-
-
+                </div>
+            </a>
         </div>
+    <#else>
 
+        <div class="col-12 text-center">
+            <h5>You are not enrolled in any courses yet.<h5>
+        </div>
+    </#list>
 
-
-
-
+    </div>
+</div>
 </body>
-
-
 </html>

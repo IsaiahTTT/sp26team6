@@ -146,39 +146,61 @@
             background-color: #e8ebf3;
             transform: translateY(-3px);
         }
+
+        .btn{
+            margin-top: 14px;
+            padding: 12px 16px;
+            color: #ffffff;
+        }
+        .btn-success {
+            background-color: #74a9c5;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: #4480a8;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+
     </style>
 </head>
 
 <body>
     <aside class="sidebar">
         <ul>
-            <li><a href="homepage.html"><img src="/images/ife.png" alt="Logo" width="60"></div>
-            </li>
+            <li><a href="/"><img src="/images/ife.png" alt="Logo" width="60"></a></li>
             <li><a href="/dashboard/${customer.customerId}">Dashboard</a></li>
-            <li><a href="/search">Search</a></li>
+            <li><a href="/search?customerId=${customer.customerId}">Search</a></li>
             <li><a href="#">Progress</a></li>
-            <li><a href="/review/${courseId}?customerId=${customer.customerId}">Review</a></li>
-            <li><a href="#">Add/Drop</a></li>
+            <li><a href="/review/${course.courseId}?customerId=${customer.customerId}">Review</a></li>
+            
         </ul>
     </aside>
 
     <main class="content">
-        <h2 class="course-title">Cardio Routine</h2>
+        <h2 class="course-title">${course.title}</h2>
 
         <div class="course-section">
-            <h4>Welcome</h4>
+            <h4>Welcome to the ${course.title} course!</h4>
+            
             <p>
-                Welcome to the Cardio Routine course! This program is designed to
-                improve endurance, increase heart health, and build consistency.
-            </p>
-            <p>
-                My name is Isaiah, and I will be your guide throughout this course. Whether you're a beginner or looking
-                to enhance your cardio fitness, this routine is
+                My name is ${provider.username!"Unknown Instructor"}, and I will be your guide throughout this course. Whether you're a beginner or looking
+                to enhance your routine, this course is
                 structured to help you achieve your goals. Let's get started on this journey to better health and
                 fitness together!
             </p>
             <p>
-                Isaiah Turner, itturner@uncg.edu
+                ${provider.username!"Unknown Instructor"}, ${provider.email!"No contact info available"}
             </p>
         </div>
 
@@ -204,8 +226,21 @@
             <div class="module">
                 <strong>Module 3:</strong> Endurance Builder
             </div>
+        </div>
 
-            
+        <div class="course-section">
+        <h4>Enrollment</h4>
+
+     <form action="/course/${course.courseId}/enroll" method="post" style="display:inline-block; margin-right:10px;">
+        <input type="hidden" name="customerId" value="${customer.customerId}">
+        <button type="submit" class="btn btn-success">Enroll</button>
+        </form>
+
+        <form action="/course/${course.courseId}/drop" method="post" style="display:inline-block;">
+        <input type="hidden" name="customerId" value="${customer.customerId}">
+        <button type="submit" class="btn btn-danger">Drop Course</button>
+        </form>
+        </div>
 
 
 
@@ -227,3 +262,8 @@
             <li>+ 3 points - Cardio Circuit ran</li>
         </ul>
     </aside>
+
+    
+</body>
+
+</html>

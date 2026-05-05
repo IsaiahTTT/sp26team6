@@ -50,20 +50,4 @@ public class EnrollmentController {
         return new ResponseEntity<>(enrollments, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Enrollment> updateEnrollment(@PathVariable Long id,
-                                                       @RequestBody Enrollment updatedEnrollment) {
-        Enrollment enrollment = enrollmentService.updateEnrollment(id, updatedEnrollment);
-        if (enrollment != null) {
-            return new ResponseEntity<>(enrollment, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEnrollment(@PathVariable Long id) {
-        enrollmentService.deleteEnrollment(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }
