@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Provider Review Replies</title>
+    <title>Review Replies</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             font-family: 'Fredoka', cursive;
@@ -24,11 +26,11 @@
             background: #2a2f3a;
             border-radius: 18px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
             margin-bottom: 20px;
         }
 
-        .reply {
+        .review-card, .reply {
             background: #1e2129;
             border: 1px solid #3a4150;
             border-radius: 16px;
@@ -46,10 +48,7 @@
             margin-right: 8px;
             border-radius: 25px;
             font-weight: 700;
-        }
-
-        .btn:hover {
-            filter: brightness(1.05);
+            border: none;
         }
 
         .muted {
@@ -57,49 +56,63 @@
             font-size: 0.9rem;
         }
 
-        .top-right {
-            position: absolute;
-            top: 20px;
-            right: 130px;
-        }
-
-        .return-btn {
-            padding: 10px 18px;
-            border-radius: 25px;
-            background-color: #1e2129;
-            color: #5f91c6;
-            border: 2px solid #33363a;
-            text-decoration: none;
+        .stars {
+            color: #ffd166;
         }
     </style>
 </head>
 
 <body>
-
 <div class="page">
 
-    <!-- HEADER -->
     <div class="panel">
-        <div class="top-right">
-            <a href="/ui/providers" class="return-btn">Back</a>
-        </div>
+        <h1>Course Reviews and Instructor Replies</h1>
+        <p class="muted">View customer reviews first, then post or view instructor replies.</p>
 
-        <h1>Review Replies</h1>
-        <p class="muted">Respond to customer feedback on courses.</p>
-
-        <a href="/ui/review-replies/add" class="btn">Add Reply</a>
-        <a href="/ui/provider-courses" class="btn">Courses</a>
+        <#if providerId??>
+            <a href="/ui/providers/dashboard/${providerId}" class="btn">Back to My Dashboard</a>
+            <a href="/ui/review-replies/add?providerId=${providerId}" class="btn">Add Reply</a>
+            <a href="/ui/provider-courses?providerId=${providerId}" class="btn">Courses</a>
+        <#else>
+            <a href="/ui/providers" class="btn">Back to Providers</a>
+            <a href="/ui/review-replies/add" class="btn">Add Reply</a>
+            <a href="/ui/provider-courses" class="btn">Courses</a>
+        </#if>
     </div>
 
-    <!-- REPLIES LIST -->
     <div class="panel">
-        <h2 style="margin-top:0;">All Replies</h2>
+        <h2 style="margin-top:0;">Customer Reviews</h2>
 
-        <#if replies?has_content>
+        <#if reviews?? && reviews?has_content>
+            <#list reviews as review>
+                <div class="review-card">
+                    <p><strong>Review ID:</strong> ${review.reviewId}</p>
+                    <p><strong>Course ID:</strong> ${review.courseId}</p>
+                    <p><strong>Customer:</strong> ${review.username}</p>
+                    <p><strong>Rating:</strong> <span class="stars">${review.rating}/5 ⭐</span></p>
+                    <p>${review.review}</p>
+
+                    <#if providerId??>
+                        <a href="/ui/review-replies/add?providerId=${providerId}" class="btn">Reply to Review</a>
+                    <#else>
+                        <a href="/ui/review-replies/add" class="btn">Reply to Review</a>
+                    </#if>
+                </div>
+            </#list>
+        <#else>
+            <p class="muted">No customer reviews found.</p>
+        </#if>
+    </div>
+
+    <div class="panel">
+        <h2 style="margin-top:0;">Instructor Replies</h2>
+
+        <#if replies?? && replies?has_content>
             <#list replies as r>
                 <div class="reply">
-                    <p><strong>Review ID:</strong> ${r.reviewId}</p>
-                    <p>${r.message!"No message"}</p>
+                    <p><strong>Reply ID:</strong> ${r.replyId!"N/A"}</p>
+                    <p><strong>Review ID:</strong> ${r.reviewId!"N/A"}</p>
+                    <p><strong>Message:</strong> ${r.message!"No message"}</p>
                 </div>
             </#list>
         <#else>
@@ -108,6 +121,5 @@
     </div>
 
 </div>
-
 </body>
 </html>

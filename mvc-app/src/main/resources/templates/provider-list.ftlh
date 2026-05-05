@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>lifeLvling - Providers</title>
-
+    <title>Provider Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             font-family: 'Fredoka', cursive;
@@ -15,7 +15,6 @@
             color: white;
         }
 
-        /* SAME PAGE STRUCTURE AS REVIEW */
         .page {
             max-width: 900px;
             margin: 40px auto;
@@ -26,18 +25,16 @@
             background: #2a2f3a;
             border-radius: 18px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
             margin-bottom: 20px;
-            width: 100%;
         }
 
-        h1 {
-            margin: 0 0 10px;
-        }
-
-        .muted {
-            color: #b8c0d0;
-            font-size: 0.9rem;
+        .provider-card {
+            background: #1e2129;
+            border: 1px solid #3a4150;
+            border-radius: 16px;
+            padding: 14px;
+            margin-top: 12px;
         }
 
         .btn {
@@ -47,68 +44,48 @@
             text-decoration: none;
             display: inline-block;
             margin-top: 15px;
-            margin-right: 10px;
+            margin-right: 8px;
             border-radius: 25px;
+            border: none;
             font-weight: 700;
         }
 
-        .btn:hover {
-            filter: brightness(1.05);
-        }
-
-        /* MATCH CARD STYLE FROM REVIEW */
-        .provider-card {
-            background: #1e2129;
-            border: 1px solid #3a4150;
-            border-radius: 16px;
-            padding: 14px;
-            margin-top: 12px;
-        }
-
-        .top-right {
-            position: absolute;
-            top: 20px;
-            right: 130px;
-        }
-
-        .return-btn {
-            padding: 10px 18px;
-            border-radius: 25px;
-            background-color: #1e2129;
-            color: #5f91c6;
-            border: 2px solid #33363a;
-            text-decoration: none;
+        .muted {
+            color: #b8c0d0;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 
 <body>
-
 <div class="page">
 
-    <!-- HEADER PANEL -->
     <div class="panel">
-        <div class="top-right">
-            <a href="/" class="return-btn">Home</a>
-        </div>
+        <h1>All Providers</h1>
 
-        <h1>Provider Dashboard</h1>
-        <p class="muted">Manage instructors, courses, and customer feedback.</p>
+        <#if currentProvider??>
+            <p class="muted">Viewing providers as ${currentProvider.username!"Instructor"}.</p>
+            <a href="/ui/providers/dashboard/${currentProvider.providerId}" class="btn">Back to My Dashboard</a>
+        <#else>
+            <a href="/" class="btn">Home</a>
+        </#if>
 
         <a href="/ui/providers/add" class="btn">Add Provider</a>
-        <a href="/ui/provider-courses" class="btn">Courses</a>
-        <a href="/ui/review-replies" class="btn">Review Replies</a>
+        <a href="/ui/provider-courses<#if providerId??>?providerId=${providerId}</#if>" class="btn">Courses</a>
+        <a href="/ui/review-replies<#if providerId??>?providerId=${providerId}</#if>" class="btn">Review Replies</a>
     </div>
 
-    <!-- PROVIDER LIST -->
     <div class="panel">
-        <h2 style="margin-top:0;">All Providers</h2>
+        <h2>Providers</h2>
 
-        <#if providers?has_content>
+        <#if providers?? && providers?has_content>
             <#list providers as p>
                 <div class="provider-card">
-                    <h4 style="margin:0;">${p.username}</h4>
-                    <p class="muted">${p.email}</p>
+                    <h4 style="margin:0;">${p.username!"No username"}</h4>
+                    <p class="muted">${p.email!"No email"}</p>
+                    <p><strong>Certifications:</strong> ${p.certifications!"Not listed"}</p>
+                    <p><strong>Teaches:</strong> ${p.exerciseType!"Not listed"}</p>
+                    <a href="/ui/providers/dashboard/${p.providerId}" class="btn">View Instructor Profile</a>
                 </div>
             </#list>
         <#else>
@@ -117,6 +94,5 @@
     </div>
 
 </div>
-
 </body>
 </html>

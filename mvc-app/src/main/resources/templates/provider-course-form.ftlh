@@ -7,67 +7,120 @@
 
     <style>
         body {
-            background-color: #1e2129;
+            margin: 0;
             font-family: 'Fredoka', cursive;
+            background-color: #1e2129;
             color: white;
-            display: flex;
-            justify-content: center;
-            padding-top: 80px;
         }
 
-        .container {
+        .page {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .panel {
             background: #2a2f3a;
-            padding: 30px;
-            border-radius: 20px;
-            width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            margin-bottom: 20px;
         }
 
-        input {
+        label {
+            display: block;
+            margin: 12px 0 6px;
+        }
+
+        input, select {
             width: 100%;
+            box-sizing: border-box;
             padding: 12px;
-            margin-top: 10px;
-            margin-bottom: 20px;
             border-radius: 12px;
-            border: none;
+            border: 1px solid #3a4150;
             background: #1e2129;
             color: white;
+            outline: none;
+            margin-bottom: 10px;
         }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            border: none;
-            background: #52affc;
+        .btn {
+            background-color: #5f91c6;
             color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
             font-size: 1rem;
+            margin-top: 15px;
+            margin-right: 8px;
+            border-radius: 25px;
+            border: none;
             cursor: pointer;
+            font-weight: 700;
         }
 
-        a {
-            color: #52affc;
-            text-decoration: none;
+        .btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .muted {
+            color: #b8c0d0;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 
 <body>
+<div class="page">
 
-<div class="container">
-    <h2>Create Course</h2>
+    <div class="panel">
+        <h1>Create Course</h1>
 
-    <form action="/ui/provider-courses" method="post">
-        <input type="text" name="title" placeholder="Course Title" required>
+        <#if provider??>
+            <p class="muted">
+                Creating course for ${provider.username!"Instructor"}.
+                Provider ID: ${provider.providerId}
+            </p>
+        <#else>
+            <p class="muted">Create a new course and assign it to a provider.</p>
+        </#if>
+    </div>
 
-        <input type="number" name="providerId" placeholder="Provider ID" required>
+    <div class="panel">
+        <form action="/ui/provider-courses" method="post">
 
-        <button type="submit">Create Course</button>
-    </form>
+            <label>Course Title</label>
+            <input type="text" name="title" placeholder="Example: Strength Training" required>
 
-    <br>
-    <a href="/ui/provider-courses">Back</a>
+            <label>Provider</label>
+            <#if providerId??>
+                <input type="number" name="providerId" value="${providerId}" readonly required>
+            <#else>
+                <select name="providerId" required>
+                    <option value="">Select provider</option>
+                    <#list providers as p>
+                        <option value="${p.providerId}">
+                            ${p.username!"Provider"} - ID ${p.providerId}
+                        </option>
+                    </#list>
+                </select>
+            </#if>
+
+            <label>Category</label>
+            <input type="text" name="category" placeholder="Example: Cardio, Weightlifting, Yoga">
+
+            <button type="submit" class="btn">Create Course</button>
+
+            <#if providerId??>
+                <a href="/ui/provider-courses?providerId=${providerId}" class="btn">Back</a>
+            <#else>
+                <a href="/ui/provider-courses" class="btn">Back</a>
+            </#if>
+
+        </form>
+    </div>
+
 </div>
-
 </body>
 </html>
