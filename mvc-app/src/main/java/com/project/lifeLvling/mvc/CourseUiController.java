@@ -17,6 +17,8 @@ import com.project.lifeLvling.entity.Course;
 import com.project.lifeLvling.entity.Provider;
 import com.project.lifeLvling.service.EnrollmentService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.project.lifeLvling.service.CustomerService;
 
 
 
@@ -27,9 +29,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CourseUiController {
 
-    private final CustomerService customerService;
-    private final CourseService courseService;
-    private final ProviderService providerService;
 
     @Autowired
     private CustomerService customerService;
@@ -73,9 +72,5 @@ public class CourseUiController {
     public String dropCourse(@PathVariable Long courseId, @RequestParam Long customerId) {
         enrollmentService.dropCourse(customerId, courseId);
         return "redirect:/dashboard/" + customerId; // Redirect to dashboard after dropping the course
-    }
-}
-
-        return "coursepage";
     }
 }
