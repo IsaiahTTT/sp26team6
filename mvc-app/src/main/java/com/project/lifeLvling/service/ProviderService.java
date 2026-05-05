@@ -3,7 +3,6 @@ package com.project.lifeLvling.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.lifeLvling.entity.Provider;
@@ -12,11 +11,14 @@ import com.project.lifeLvling.repository.ProviderRepository;
 @Service
 public class ProviderService {
 
-    @Autowired
-    private ProviderRepository repo;
+    private final ProviderRepository repo;
 
-    public Provider createProvider(Provider p) {
-        return repo.save(p);
+    public ProviderService(ProviderRepository repo) {
+        this.repo = repo;
+    }
+
+    public Provider createProvider(Provider provider) {
+        return repo.save(provider);
     }
 
     public List<Provider> getAllProviders() {
@@ -27,14 +29,25 @@ public class ProviderService {
         return repo.findById(id).orElse(null);
     }
 
+    public Provider getProviderByEmail(String email) {
+        return repo.findByEmail(email);
+    }
+
     public Provider updateProvider(Long id, Provider updated) {
         Optional<Provider> existing = repo.findById(id);
+
         if (existing.isPresent()) {
-            Provider p = existing.get();
-            p.setUsername(updated.getUsername());
-            p.setEmail(updated.getEmail());
-            return repo.save(p);
+            Provider provider = existing.get();
+
+            provider.setUsername(updated.getUsername());
+            provider.setEmail(updated.getEmail());
+            provider.setPassword(updated.getPassword());
+            provider.setCertifications(updated.getCertifications());
+            provider.setExerciseType(updated.getExerciseType());
+
+            return repo.save(provider);
         }
+
         return null;
     }
 

@@ -33,12 +33,24 @@ public class CourseService {
 
     public Course updateCourse(Long id, Course updated) {
         Optional<Course> existing = repo.findById(id);
+
         if (existing.isPresent()) {
             Course c = existing.get();
+
             c.setTitle(updated.getTitle());
             c.setProviderId(updated.getProviderId());
+            c.setDescription(updated.getDescription());
+            c.setCategory(updated.getCategory());
+            c.setExerciseType(updated.getExerciseType());
+            c.setInstructions(updated.getInstructions());
+            c.setSets(updated.getSets());
+            c.setReps(updated.getReps());
+            c.setDurationMinutes(updated.getDurationMinutes());
+            c.setPointsReward(updated.getPointsReward());
+
             return repo.save(c);
         }
+
         return null;
     }
 
