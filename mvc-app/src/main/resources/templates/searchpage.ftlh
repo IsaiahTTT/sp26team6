@@ -145,15 +145,7 @@
             </ul>
         </nav>
     </aside>
-    <aside class="right-sidebar">
-        <h4>Popular Courses!</h4>
-        <ul>
-            <li>Cardio Routine</li>
-            <li>Strength Training</li>
-            <li>Yoga Basics</li>
-
-        </ul>
-    </aside>
+    
     <div class="content">
 
         <h2>Course Search</h2>
