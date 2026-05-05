@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Course</title>
+    <title>Edit Course</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -34,7 +36,7 @@
             margin: 12px 0 6px;
         }
 
-        input, select, textarea {
+        input, textarea {
             width: 100%;
             max-width: 100%;
             padding: 12px;
@@ -71,13 +73,23 @@
             font-weight: 700;
         }
 
+        .danger {
+            background-color: #bd0a0a;
+        }
+
         .muted {
             color: #b8c0d0;
             font-size: 0.9rem;
         }
 
+        form.delete-form {
+            margin-top: 10px;
+        }
+
         @media (max-width: 650px) {
-            .row { grid-template-columns: 1fr; }
+            .row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -86,85 +98,72 @@
 <div class="page">
 
     <div class="panel">
-        <h1>Create Course</h1>
-
-        <#if provider??>
-            <p class="muted">Creating course for ${provider.username!"Instructor"} | Provider ID: ${provider.providerId}</p>
-        <#else>
-            <p class="muted">Create a workout course and assign it to an instructor.</p>
-        </#if>
+        <h1>Edit Course</h1>
+        <p class="muted">
+            Update the workout course details, instructions, and point reward.
+        </p>
     </div>
 
     <div class="panel">
-        <form action="/ui/provider-courses" method="post">
+        <form action="/ui/provider-courses/update/${course.courseId}" method="post">
 
             <label>Course Title</label>
-            <input type="text" name="title" placeholder="Example: Deadlift Strength Builder" required>
+            <input type="text" name="title" value="${course.title!""}" required>
 
-            <label>Provider</label>
-            <#if providerId??>
-                <input type="number" name="providerId" value="${providerId}" readonly required>
-            <#else>
-                <select name="providerId" required>
-                    <option value="">Select provider</option>
-                    <#list providers as p>
-                        <option value="${p.providerId}">
-                            ${p.username!"Provider"} - ID ${p.providerId}
-                        </option>
-                    </#list>
-                </select>
-            </#if>
+            <label>Provider ID</label>
+            <input type="number" name="providerId" value="${course.providerId}" readonly required>
 
             <div class="row">
                 <div>
                     <label>Category</label>
-                    <input type="text" name="category" placeholder="Strength, Cardio, Flexibility">
+                    <input type="text" name="category" value="${course.category!""}" placeholder="Strength, Cardio, Yoga">
                 </div>
 
                 <div>
                     <label>Exercise Type</label>
-                    <input type="text" name="exerciseType" placeholder="Deadlifts, Running, Yoga">
+                    <input type="text" name="exerciseType" value="${course.exerciseType!""}" placeholder="Deadlifts, Running, Stretching">
                 </div>
             </div>
 
             <label>Description</label>
-            <textarea name="description" placeholder="Short summary of the course."></textarea>
+            <textarea name="description">${course.description!""}</textarea>
 
             <label>Workout Instructions</label>
-            <textarea name="instructions" placeholder="Example: Warm up, complete 4 sets of deadlifts, rest 90 seconds between sets."></textarea>
+            <textarea name="instructions">${course.instructions!""}</textarea>
 
             <div class="row">
                 <div>
                     <label>Sets</label>
-                    <input type="number" name="sets" placeholder="4">
+                    <input type="number" name="sets" value="${course.sets!""}">
                 </div>
 
                 <div>
                     <label>Reps</label>
-                    <input type="number" name="reps" placeholder="8">
+                    <input type="number" name="reps" value="${course.reps!""}">
                 </div>
             </div>
 
             <div class="row">
                 <div>
                     <label>Duration Minutes</label>
-                    <input type="number" name="durationMinutes" placeholder="45">
+                    <input type="number" name="durationMinutes" value="${course.durationMinutes!""}">
                 </div>
 
                 <div>
                     <label>Points Reward</label>
-                    <input type="number" name="pointsReward" placeholder="100">
+                    <input type="number" name="pointsReward" value="${course.pointsReward!""}">
                 </div>
             </div>
 
-            <button type="submit" class="btn">Create Course</button>
+            <button class="btn" type="submit">Save Changes</button>
+            <a href="/ui/provider-courses?providerId=${course.providerId}" class="btn">Back</a>
+        </form>
 
-            <#if providerId??>
-                <a href="/ui/provider-courses?providerId=${providerId}" class="btn">Back</a>
-            <#else>
-                <a href="/ui/provider-courses" class="btn">Back</a>
-            </#if>
-
+        <form class="delete-form" action="/ui/provider-courses/delete/${course.courseId}" method="post">
+            <input type="hidden" name="providerId" value="${course.providerId}">
+            <button class="btn danger" type="submit" onclick="return confirm('Delete this course?');">
+                Delete Course
+            </button>
         </form>
     </div>
 

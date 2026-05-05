@@ -6,6 +6,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Fredoka', cursive;
@@ -55,6 +59,10 @@
             filter: brightness(1.05);
         }
 
+        .danger {
+            background-color: #bd0a0a;
+        }
+
         .muted {
             color: #b8c0d0;
             font-size: 0.9rem;
@@ -77,6 +85,38 @@
             gap: 10px;
             flex-wrap: wrap;
             align-items: center;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-top: 12px;
+        }
+
+        .detail-box {
+            background: #2a2f3a;
+            border: 1px solid #3a4150;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .instructions {
+            margin-top: 12px;
+            background: #2a2f3a;
+            border: 1px solid #3a4150;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        form {
+            display: inline;
+        }
+
+        @media (max-width: 650px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -109,37 +149,83 @@
             <#list courses as c>
                 <#if !providerId?? || c.providerId == providerId>
                     <div class="course-card">
+
                         <div class="course-top">
                             <h3 style="margin:0;">${c.title!"Untitled Course"}</h3>
                             <span class="badge">Course ID: ${c.courseId}</span>
                         </div>
 
-                        <p class="muted">
-                            Provider ID: ${c.providerId}
-                        </p>
-
-                        <p>
-                            <strong>Category:</strong> ${c.category!"Not listed"}
-                        </p>
-
                         <#assign teacherName = "Unknown Instructor">
                         <#assign teacherType = "Not listed">
+                        <#assign teacherCerts = "Not listed">
+
                         <#if providers??>
                             <#list providers as p>
                                 <#if p.providerId == c.providerId>
                                     <#assign teacherName = p.username!"Unknown Instructor">
                                     <#assign teacherType = p.exerciseType!"Not listed">
+                                    <#assign teacherCerts = p.certifications!"Not listed">
                                 </#if>
                             </#list>
                         </#if>
 
-                        <p>
-                            <strong>Instructor:</strong> ${teacherName}
+                        <p class="muted">
+                            Provider ID: ${c.providerId} | Instructor: ${teacherName}
                         </p>
 
-                        <p>
-                            <strong>Exercise Type:</strong> ${teacherType}
+                        <div class="detail-grid">
+                            <div class="detail-box">
+                                <strong>Category:</strong>
+                                <p>${c.category!"Not listed"}</p>
+                            </div>
+
+                            <div class="detail-box">
+                                <strong>Exercise Type:</strong>
+                                <p>${c.exerciseType!teacherType}</p>
+                            </div>
+
+                            <div class="detail-box">
+                                <strong>Sets:</strong>
+                                <p>${c.sets!"N/A"}</p>
+                            </div>
+
+                            <div class="detail-box">
+                                <strong>Reps:</strong>
+                                <p>${c.reps!"N/A"}</p>
+                            </div>
+
+                            <div class="detail-box">
+                                <strong>Duration:</strong>
+                                <p>${c.durationMinutes!"N/A"} minutes</p>
+                            </div>
+
+                            <div class="detail-box">
+                                <strong>Points Reward:</strong>
+                                <p>${c.pointsReward!"N/A"}</p>
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <strong>Description</strong>
+                            <p>${c.description!"No description listed."}</p>
+
+                            <strong>Workout Instructions</strong>
+                            <p>${c.instructions!"No workout instructions listed."}</p>
+                        </div>
+
+                        <p class="muted">
+                            Instructor Certifications: ${teacherCerts}
                         </p>
+
+                        <a href="/ui/provider-courses/edit/${c.courseId}" class="btn">Edit Course</a>
+
+                        <form action="/ui/provider-courses/delete/${c.courseId}" method="post">
+                            <input type="hidden" name="providerId" value="${c.providerId}">
+                            <button class="btn danger" type="submit" onclick="return confirm('Delete this course?');">
+                                Delete Course
+                            </button>
+                        </form>
+
                     </div>
                 </#if>
             </#list>
