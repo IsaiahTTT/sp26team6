@@ -164,7 +164,7 @@
     <div class="page">
 
         <div class="panel">
-            <div class="top-right"><a href="/courses/${courseId}?customerId=${customer.customerId}" class="return-btn">Return</a></div>
+            <div class="top-right"><a href="/course/${course.courseId}?customerId=${customer.customerId}" class="return-btn">Return</a></div>
             <h1>Course Reviews</h1>
             <p class ="muted">Course ID: ${courseId}</p>
             <p class="muted">Write a review and see what others have said.</p>
@@ -184,7 +184,7 @@
                 <div class="row">
                     <div>
                         <label >Course</label>
-                        <input type="text" value="Course ${courseId}" readonly>
+                        <input type="text" value="Course ${course.title}" readonly>
                     </div>
 
                     <div>

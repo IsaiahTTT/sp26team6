@@ -24,9 +24,6 @@ public class AppUiController {
         return "signuppage";
     }
 
-    @GetMapping("/search")
-    public String showSearchPage() {
-        return "searchpage";
-    }
+
 
 }

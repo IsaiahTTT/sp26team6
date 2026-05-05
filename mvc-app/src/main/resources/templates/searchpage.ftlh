@@ -136,8 +136,8 @@
     <aside class="sidebar">
         <nav>
             <ul>
-                <li><a href="homepage.html"><img src="/images/ife.png" alt="Logo" width="60"></div>
-                </li>
+                <li><a href="/"><img src="/images/ife.png" alt="Logo" width="60"></a></li>
+                
                 <li><a href="/dashboard/${customer.customerId}">Dashboard</a></li>
                 <li><a href="#news">News</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -167,35 +167,35 @@
 
 
         <div class="row">
+    <#list courses as course>
+        <div class="col-md-3 d-flex justify-content-center">
+            <div class="card course-card">
+                <div class="card-header">${course.title}</div>
+                <div class="card-body">
+                    <p class="card-text">
+                        ${course.description!"No description available."}
+                    </p>
 
+                    <p><strong>Category:</strong> ${course.category!"N/A"}</p>
+                    <p><strong>Price:</strong> 
+                        <#if course.price??>
+                            $${course.price}
+                        <#else>
+                            Free/Not listed
+                        </#if>
+                    </p>
 
-            <div class="col-md-3 d-flex justify-content-center">
-                <div class="card course-card">
-                    <div class="card-header">Cardio Routine - Isaiah Turner</div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            A comprehensive cardio workout plan designed to improve cardiovascular health and endurance.
-                        </p>
-                        <a href="/course/${course.courseId}" class="btn btn-primary">View Course</a>
-                    </div>
+                    <a href="/course/${course.courseId}?customerId=${customerId}" class="btn btn-primary">
+                        View Course
+                    </a>
                 </div>
             </div>
-
-
-            <div class="col-md-3 d-flex justify-content-center">
-                <div class="card course-card">
-                    <div class="card-header">Strength Training - Dr. Johnson</div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            A structured strength training program focused on building muscle and increasing overall
-                            strength.
-                        </p>
-                        <a href="#" class="btn btn-primary">View Course</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    <#else>
+        <p>No courses found.</p>
+    </#list>
+</div>
+       
 </body>
 
 

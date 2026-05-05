@@ -27,6 +27,10 @@ public class CourseService {
         return repo.findByProviderId(providerId);
     }
 
+    public Course getCourseById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
+
     public Course updateCourse(Long id, Course updated) {
         Optional<Course> existing = repo.findById(id);
         if (existing.isPresent()) {

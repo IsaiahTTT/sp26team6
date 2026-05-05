@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.lifeLvling.entity.Customer;
+import com.project.lifeLvling.entity.Course;
 
 
 import com.project.lifeLvling.service.EnrollmentService;
 import com.project.lifeLvling.service.CustomerService;
 import com.project.lifeLvling.service.ReviewService;
+import com.project.lifeLvling.service.CourseService;
 
 @Controller
 public class ReviewUiController {
@@ -28,11 +30,16 @@ public class ReviewUiController {
     @Autowired
     private EnrollmentService enrollmentService;
 
+    @Autowired
+    private CourseService courseService;
+
 
     @GetMapping("/review/{courseId}")
     public String showReviewPage(@PathVariable Long courseId, @RequestParam Long customerId, Model model) {
          Customer customer = customerService.getCustomerById(customerId);
+         Course course = courseService.getCourseById(courseId);
         model.addAttribute("customer", customer);
+        model.addAttribute("course", course);
         model.addAttribute("courseId", courseId);
         model.addAttribute("customerId", customerId);
         model.addAttribute("reviews", reviewService.getReviewsByCourseId(courseId));
@@ -47,8 +54,10 @@ public class ReviewUiController {
         boolean enrolled = enrollmentService.getAllEnrollments().stream()
                 .anyMatch(enrollment -> enrollment.getCustomerId().equals(customerId) && enrollment.getCourseId().equals(courseId));
         if (!enrolled) {
+            Course course = courseService.getCourseById(courseId);
             model.addAttribute("error", "You must be enrolled in the course to leave a review.");
             model.addAttribute("customer", customer);
+            model.addAttribute("course", course);
             model.addAttribute("courseId", courseId);
             model.addAttribute("customerId", customerId);
             model.addAttribute("reviews", reviewService.getReviewsByCourseId(courseId));
