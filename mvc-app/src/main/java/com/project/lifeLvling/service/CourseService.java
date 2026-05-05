@@ -45,4 +45,11 @@ public class CourseService {
     public void deleteCourse(Long id) {
         repo.deleteById(id);
     }
+
+    public List<Course> searchCourses(String keyword) {
+        if (keyword ==null || keyword.isBlank()){
+            return getAllCourses();
+        }
+        return repo.findByTitleContainingIgnoreCase(keyword);
+    }
 }

@@ -150,11 +150,19 @@
 
         <h2>Course Search</h2>
         <hr style="margin:30px 0; opacity:0.2;">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search for courses..." aria-label="Search for courses"
-                aria-describedby="button-search"> <button class="btn btn-outline-secondary" type="button"
-                id="button-search">Search</button>
-        </div>
+        <form action="/search" method="get" class="input-group mb-3">
+    <input type="hidden" name="customerId" value="${customer.customerId}">
+
+    <input type="text"
+           name="keyword"
+           class="form-control"
+           placeholder="Search for courses..."
+           value="${keyword!''}">
+
+    <button class="btn btn-outline-secondary" type="submit">
+        Search
+    </button>
+</form>
         <h1>recommended courses...</h1>
 
 

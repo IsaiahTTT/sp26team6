@@ -103,16 +103,17 @@ public String showDashboard(@PathVariable Long customerId, Model model) {
 private CourseService courseService;
 
 @GetMapping("/search")
-public String showSearchPage(@RequestParam(required = false) long customerId,Model model){
+public String showSearchPage(@RequestParam long customerId, @RequestParam(required = false) String keyword, Model model) {
 
 
     Customer customer = customerService.getCustomerById(customerId);
 
-    List<Course> courses = courseService.getAllCourses();
+    List<Course> courses = courseService.searchCourses(keyword);
 
     model.addAttribute("courses", courses);
     model.addAttribute("customer", customer);
     model.addAttribute("customerId", customerId);
+    model.addAttribute("keyword", keyword);
     return "searchpage"; // Return the search page view
 }
 

@@ -10,4 +10,6 @@ import com.project.lifeLvling.entity.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByProviderId(Long providerId);
+
+    List<Course> findByTitleContainingIgnoreCase(String keyword);
 }
