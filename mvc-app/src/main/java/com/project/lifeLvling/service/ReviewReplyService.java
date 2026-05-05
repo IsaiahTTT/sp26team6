@@ -31,4 +31,8 @@ public class ReviewReplyService {
     public List<ReviewReply> getRepliesByReview(Long reviewId) {
         return repo.findByReviewId(reviewId);
     }
+
+    public void deleteReply(Long replyId) {
+        repo.deleteById(replyId);
+    }
 }

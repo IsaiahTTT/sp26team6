@@ -49,6 +49,11 @@
             border-radius: 25px;
             font-weight: 700;
             border: none;
+            cursor: pointer;
+        }
+
+        .danger {
+            background-color: #bd0a0a;
         }
 
         .muted {
@@ -59,6 +64,10 @@
         .stars {
             color: #ffd166;
         }
+
+        form {
+            display: inline;
+        }
     </style>
 </head>
 
@@ -67,7 +76,7 @@
 
     <div class="panel">
         <h1>Course Reviews and Instructor Replies</h1>
-        <p class="muted">View customer reviews first, then post or view instructor replies.</p>
+        <p class="muted">View customer reviews first, then post, view, or delete instructor replies.</p>
 
         <#if providerId??>
             <a href="/ui/providers/dashboard/${providerId}" class="btn">Back to My Dashboard</a>
@@ -113,6 +122,16 @@
                     <p><strong>Reply ID:</strong> ${r.replyId!"N/A"}</p>
                     <p><strong>Review ID:</strong> ${r.reviewId!"N/A"}</p>
                     <p><strong>Message:</strong> ${r.message!"No message"}</p>
+
+                    <form action="/ui/review-replies/delete/${r.replyId}" method="post">
+                        <#if providerId??>
+                            <input type="hidden" name="providerId" value="${providerId}">
+                        </#if>
+
+                        <button class="btn danger" type="submit" onclick="return confirm('Delete this reply?');">
+                            Delete Reply
+                        </button>
+                    </form>
                 </div>
             </#list>
         <#else>
