@@ -2,7 +2,6 @@ package com.project.lifeLvling.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.lifeLvling.entity.ReviewReply;
@@ -11,18 +10,29 @@ import com.project.lifeLvling.repository.ReviewReplyRepository;
 @Service
 public class ReviewReplyService {
 
-    @Autowired
-    private ReviewReplyRepository repo;
+    private final ReviewReplyRepository repo;
 
-    public ReviewReply createReply(ReviewReply r) {
-        return repo.save(r);
+    public ReviewReplyService(ReviewReplyRepository repo) {
+        this.repo = repo;
+    }
+
+    public ReviewReply create(ReviewReply reply) {
+        return repo.save(reply);
+    }
+
+    public List<ReviewReply> getAll() {
+        return repo.findAll();
+    }
+
+    public ReviewReply createReply(ReviewReply reply) {
+        return repo.save(reply);
     }
 
     public List<ReviewReply> getRepliesByReview(Long reviewId) {
         return repo.findByReviewId(reviewId);
     }
 
-    public void deleteReply(Long id) {
-        repo.deleteById(id);
+    public void deleteReply(Long replyId) {
+        repo.deleteById(replyId);
     }
 }

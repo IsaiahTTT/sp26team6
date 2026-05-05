@@ -13,28 +13,38 @@ public class ReviewReply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reply_id")
     private Long replyId;
 
-    @Column(nullable = false)
-    private Long reviewId;
-
-    @Column(nullable = false)
+    @Column(name = "message")
     private String message;
+
+    @Column(name = "review_id")
+    private Long reviewId;
 
     public ReviewReply() {}
 
-    public ReviewReply(Long replyId, Long reviewId, String message) {
+    public Long getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Long replyId) {
         this.replyId = replyId;
-        this.reviewId = reviewId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public Long getReplyId() { return replyId; }
-    public void setReplyId(Long replyId) { this.replyId = replyId; }
+    public Long getReviewId() {
+        return reviewId;
+    }
 
-    public Long getReviewId() { return reviewId; }
-    public void setReviewId(Long reviewId) { this.reviewId = reviewId; }
-
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
 }
